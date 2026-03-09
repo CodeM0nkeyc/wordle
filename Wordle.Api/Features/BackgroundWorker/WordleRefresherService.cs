@@ -1,0 +1,61 @@
+﻿namespace Wordle.Api.Features.BackgroundWorker;
+
+public class WordleRefresherService : BackgroundService
+{
+    private readonly IServiceProvider _serviceProvider;
+    private readonly IWordleStorage _wordleStorage;
+    private readonly ILogger<WordleRefresherService> _logger;
+
+    public WordleRefresherService(
+        IServiceProvider serviceProvider,
+        IWordleStorage wordleStorage,
+        ILogger<WordleRefresherService> logger)
+    {
+        _serviceProvider = serviceProvider;
+        _wordleStorage = wordleStorage;
+        _logger = logger;
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        _logger.LogInformation("Starting wordle refresher service.");
+
+        await UpdateWordAsync();
+
+        DateTime utcNow = DateTime.UtcNow;
+        DateTime utcToStart = new DateTime(utcNow.Year, utcNow.Month, utcNow.Day, 10, 0, 0);
+
+        TimeSpan timeDifference = utcToStart - utcNow;
+
+        if (timeDifference >= TimeSpan.Zero)
+        {
+            await Task.Delay(timeDifference, stoppingToken);
+        }
+        else
+        {
+            DateTime nextUtcToStart = utcToStart.AddDays(1);
+            TimeSpan delayToStartTime = nextUtcToStart - utcNow;
+
+            await Task.Delay(delayToStartTime, stoppingToken);
+        }
+
+        using PeriodicTimer periodicTimer = new PeriodicTimer(TimeSpan.FromHours(24));
+
+        while (true)
+        {
+            await UpdateWordAsync();
+            await periodicTimer.WaitForNextTickAsync(stoppingToken);
+        }
+    }
+
+    private async Task UpdateWordAsync()
+    {
+        using IServiceScope scope = _serviceProvider.CreateScope();
+
+        var wordleApiClient = 
+            scope.ServiceProvider.GetRequiredService<WordleApiClient.Services.WordleApiClient>();
+
+        string word = await wordleApiClient.GetRandomWordAsync();
+        await _wordleStorage.SetWordAsync(word);
+    }
+}

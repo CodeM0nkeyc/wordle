@@ -1,0 +1,15 @@
+﻿global using Microsoft.AspNetCore.Authentication;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Options;
+global using Microsoft.Extensions.Primitives;
+global using System.Security.Claims;
+global using System.Security.Cryptography;
+global using System.Text.Encodings.Web;
+global using System.Text.Json;
+global using System.Text.Json.Nodes;
+global using Wordle.Api.Features.Authentication.Models;
+global using Wordle.Api.Features.Authentication.Services;
+global using Wordle.Api.Features.WordleApiClient.Services;
+global using Wordle.Api.Features.Persistence;
+global using Wordle.Api.Features.BackgroundWorker;

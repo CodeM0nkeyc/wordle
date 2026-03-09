@@ -7,3 +7,5 @@
 
 *.vs
 *.csproj.user
+
+**/PublishProfiles
