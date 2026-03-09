@@ -2,18 +2,26 @@
 
 public class FileWordleStorage : IWordleStorage, IDisposable
 {
+    private const string _cacheKey = "word";
     private bool _disposed = false;
 
     private readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
     private readonly FileStream _wordFile;
+    private readonly IMemoryCache _cache;
 
-    public FileWordleStorage()
+    public FileWordleStorage(IMemoryCache cache)
     {
+        _cache = cache;
         _wordFile = new FileStream("word.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read, 4096, true);
     }
 
     public async Task<string> GetWordAsync()
     {
+        if (_cache.TryGetValue(_cacheKey, out string cachedWord))
+        {
+            return cachedWord!;
+        }
+
         await _lock.WaitAsync();
 
         StreamReader streamReader = new StreamReader(_wordFile, leaveOpen: true);
@@ -21,6 +29,7 @@ public class FileWordleStorage : IWordleStorage, IDisposable
         try
         {
             string word = await streamReader.ReadToEndAsync();
+            _cache.Set(_cacheKey, word);
 
             return word;
         }
@@ -41,6 +50,7 @@ public class FileWordleStorage : IWordleStorage, IDisposable
         try
         {
             await streamWriter.WriteAsync(word);
+            _cache.Set(_cacheKey, word);
         }
         finally
         {

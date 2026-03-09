@@ -5,6 +5,7 @@ builder.Services.AddHttpClient("WordleClient", cfg =>
     cfg.Timeout = TimeSpan.FromSeconds(10);
 });
 
+builder.Services.AddMemoryCache();
 builder.Services.AddWebEncoders();
 
 builder.Services.AddAuthentication(ApiKeyAuthenticationDefaults.Scheme)
