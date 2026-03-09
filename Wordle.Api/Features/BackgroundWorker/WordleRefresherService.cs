@@ -23,21 +23,11 @@ public class WordleRefresherService : BackgroundService
         await UpdateWordAsync();
 
         DateTime utcNow = DateTime.UtcNow;
-        DateTime utcToStart = new DateTime(utcNow.Year, utcNow.Month, utcNow.Day, 10, 0, 0);
+        DateTime utcToStart = new DateTime(utcNow.Year, utcNow.Month, utcNow.Day + 1, 10, 0, 0);
 
-        TimeSpan timeDifference = utcToStart - utcNow;
+        long delay = (utcToStart - utcNow).Ticks % (TimeSpan.TicksPerHour * 24);
 
-        if (timeDifference >= TimeSpan.Zero)
-        {
-            await Task.Delay(timeDifference, stoppingToken);
-        }
-        else
-        {
-            DateTime nextUtcToStart = utcToStart.AddDays(1);
-            TimeSpan delayToStartTime = nextUtcToStart - utcNow;
-
-            await Task.Delay(delayToStartTime, stoppingToken);
-        }
+        await Task.Delay(TimeSpan.FromTicks(delay));
 
         using PeriodicTimer periodicTimer = new PeriodicTimer(TimeSpan.FromHours(24));
 
