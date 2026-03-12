@@ -1,6 +1,6 @@
-﻿namespace Wordle.Api.Features.BackgroundWorker;
+﻿namespace Wordle.Api.BackgroundWorkers;
 
-public class WordleRefresherService : BackgroundService
+internal sealed class WordleRefresherService : BackgroundService
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly IWordleStorage _wordleStorage;
@@ -43,7 +43,7 @@ public class WordleRefresherService : BackgroundService
         using IServiceScope scope = _serviceProvider.CreateScope();
 
         var wordleApiClient = 
-            scope.ServiceProvider.GetRequiredService<WordleApiClient.Services.WordleApiClient>();
+            scope.ServiceProvider.GetRequiredService<IWordleApiClient>();
 
         string word = await wordleApiClient.GetRandomWordAsync();
         await _wordleStorage.SetWordAsync(word);

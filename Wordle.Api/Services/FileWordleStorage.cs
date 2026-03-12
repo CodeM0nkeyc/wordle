@@ -1,6 +1,6 @@
-﻿namespace Wordle.Api.Features.Persistence;
+﻿namespace Wordle.Api.Services;
 
-public class FileWordleStorage : IWordleStorage, IDisposable
+internal sealed class FileWordleStorage : IWordleStorage, IDisposable
 {
     private const string _cacheKey = "word";
     private bool _disposed = false;
@@ -13,6 +13,11 @@ public class FileWordleStorage : IWordleStorage, IDisposable
     {
         _cache = cache;
         _wordFile = new FileStream("word.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read, 4096, true);
+    }
+
+    ~FileWordleStorage()
+    {
+        Dispose(false);
     }
 
     public async Task<string> GetWordAsync()
@@ -63,6 +68,7 @@ public class FileWordleStorage : IWordleStorage, IDisposable
     public void Dispose()
     {
         Dispose(true);
+        GC.SuppressFinalize(this);
     }
 
     private void Dispose(bool disposing)

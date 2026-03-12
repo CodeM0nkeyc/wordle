@@ -18,7 +18,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddSingleton<IWordleStorage, FileWordleStorage>();
 
-builder.Services.AddScoped<WordleApiClient, RandomWordApiClient>();
+builder.Services.AddScoped<IWordleApiClient, RandomWordApiClient>();
 
 builder.Services.AddHostedService<WordleRefresherService>();
 

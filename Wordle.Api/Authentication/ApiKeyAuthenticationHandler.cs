@@ -1,6 +1,6 @@
-﻿namespace Wordle.Api.Features.Authentication.Services;
+﻿namespace Wordle.Api.Authentication;
 
-public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeySettings>
+internal sealed class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeySettings>
 {
     public ApiKeyAuthenticationHandler(
         IOptionsMonitor<ApiKeySettings> opts,
@@ -20,7 +20,7 @@ public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeySettings>
 
         (string? authScheme, string? apiKey) = (apiKeyValues[0], apiKeyValues[1]);
 
-        if (authScheme != Scheme.Name || apiKey is null)
+        if (authScheme != Scheme.Name || string.IsNullOrEmpty(apiKey))
         {
             return Task.FromResult(AuthenticateResult.Fail("Invalid authentication parameters in request."));
         }
