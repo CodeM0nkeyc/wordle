@@ -47,5 +47,7 @@ internal sealed class WordleRefresherService : BackgroundService
 
         string word = await wordleApiClient.GetRandomWordAsync();
         await _wordleStorage.SetWordAsync(word);
+
+        Console.WriteLine(word);
     }
 }

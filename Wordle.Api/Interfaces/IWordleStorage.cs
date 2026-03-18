@@ -1,4 +1,4 @@
-﻿namespace Wordle.Api.Abstractions;
+﻿namespace Wordle.Api.Interfaces;
 
 public interface IWordleStorage
 {
