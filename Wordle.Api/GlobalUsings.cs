@@ -5,7 +5,7 @@ global using Microsoft.Extensions.Caching.Memory;
 global using Microsoft.Extensions.Options;
 global using System.Security.Claims;
 global using System.Text.Encodings.Web;
-global using Wordle.Api.Abstractions;
 global using Wordle.Api.Authentication;
 global using Wordle.Api.Services;
 global using Wordle.Api.BackgroundWorkers;
+global using Wordle.Api.Interfaces;

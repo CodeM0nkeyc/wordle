@@ -2,6 +2,8 @@
 
 internal sealed class WordleRefresherService : BackgroundService
 {
+    private const int _wordLength = 5;
+
     private readonly IServiceProvider _serviceProvider;
     private readonly IWordleStorage _wordleStorage;
     private readonly ILogger<WordleRefresherService> _logger;
@@ -45,7 +47,7 @@ internal sealed class WordleRefresherService : BackgroundService
         var wordleApiClient = 
             scope.ServiceProvider.GetRequiredService<IWordleApiClient>();
 
-        string word = await wordleApiClient.GetRandomWordAsync();
+        string word = await wordleApiClient.GetRandomWordAsync(_wordLength);
         await _wordleStorage.SetWordAsync(word);
 
         Console.WriteLine(word);

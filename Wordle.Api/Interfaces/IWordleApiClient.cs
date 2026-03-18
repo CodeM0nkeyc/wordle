@@ -1,6 +1,6 @@
 ﻿namespace Wordle.Api.Interfaces;
 
-internal interface IWordleApiClient
+public interface IWordleApiClient
 {
-    public abstract Task<string> GetRandomWordAsync(int wordLength);
+    public Task<string> GetRandomWordAsync(int wordLength);
 }

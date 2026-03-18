@@ -2,8 +2,6 @@
 
 internal sealed class RandomWordApiClient : IWordleApiClient
 {
-    private const int _wordLength = 5;
-
     private const string _apiUrl = @"https://random-word-api.herokuapp.com";
 
     private readonly HttpClient _httpClient;
@@ -14,9 +12,9 @@ internal sealed class RandomWordApiClient : IWordleApiClient
         _httpClient.BaseAddress = new Uri(_apiUrl);
     }
 
-    public async Task<string> GetRandomWordAsync()
+    public async Task<string> GetRandomWordAsync(int wordLength)
     {
-        HttpResponseMessage response = await _httpClient.GetAsync($"word?length={_wordLength}");
+        HttpResponseMessage response = await _httpClient.GetAsync($"word?length={wordLength}");
         response.EnsureSuccessStatusCode();
 
         string[]? responseObject = await response.Content.ReadFromJsonAsync<string[]>();
