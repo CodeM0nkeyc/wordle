@@ -27,6 +27,7 @@ internal class WordleLocalApiClient : IWordleApiClient, IDisposable
             };
 
             httpClient.DefaultRequestHeaders.Add("Authorization", $"ApiKey {apiKey}");
+            httpClient.DefaultRequestHeaders.Add("X-TimeZone", TimeZoneInfo.Local.BaseUtcOffset.ToString());
 
             return httpClient;
         }, false);
