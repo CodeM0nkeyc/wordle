@@ -1,0 +1,69 @@
+﻿<Window x:Class="Wordle.UI.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wordle.UI.View"
+        xmlns:vm="clr-namespace:Wordle.UI.ViewModel"
+        xmlns:controls="clr-namespace:Wordle.UI.UserControls"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        Background="AliceBlue">
+    <Window.DataContext>
+        <Binding RelativeSource="{RelativeSource Mode=Self}" Path="ViewModel"/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Style x:Key="listViewWordleStyle" TargetType="ListView">
+            <Setter Property="Focusable" Value="False" />
+
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="vm:WordViewModel">
+                        <controls:WordleTextBox
+                            Padding="5"
+                            Width="Auto"
+                            HorizontalAlignment="Left"
+                            IsEnabled="{Binding Current}"
+                            Letters="{Binding Letters}">
+
+                            <controls:WordleTextBox.InputBindings>
+                                <KeyBinding Key="Return"
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType=local:MainWindow},
+                                                              Path=ViewModel.CheckWordCommand}" />
+                            </controls:WordleTextBox.InputBindings>
+                        </controls:WordleTextBox>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Focusable" Value="False" />
+                        
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+        
+        <ListView Background="Transparent"
+                  BorderThickness="1"
+                  Padding="10"
+                  Style="{StaticResource listViewWordleStyle}"
+                  ItemsSource="{Binding Words}"/>
+    </StackPanel>
+</Window>

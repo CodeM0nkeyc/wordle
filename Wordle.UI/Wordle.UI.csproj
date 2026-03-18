@@ -8,4 +8,18 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="Model\Defaults.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.4" />
+    <PackageReference Include="System.Runtime.Caching" Version="10.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wordle.UI.Styles\Wordle.UI.Styles.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,12 +1,40 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿namespace Wordle.UI;
 
-namespace Wordle.UI;
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
 public partial class App : Application
 {
-}
+    public new static App Current => (App)Application.Current;
 
+    public IServiceProvider Services { get; }
+
+    public App()
+    {
+        Services = CreateServiceProvider();
+
+        DispatcherUnhandledException += OnDispatcherUnhandledException;
+    }
+
+    private void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+    {
+        string exceptionMessage = $"{e.Exception.ToString()}";
+        MessageBox.Show(exceptionMessage);
+    }
+
+    private static IServiceProvider CreateServiceProvider()
+    {
+        IServiceCollection services = new ServiceCollection();
+
+        services.AddSingleton<IWordleService, WordleService>();
+
+        services.AddScoped<IWordleApiClient, WordleLocalApiClient>(p =>
+        {
+            var wordleApiClient = new WordleLocalApiClient(
+                Defaults.BaseApiUrl + "/wordle", Defaults.ApiKey, Defaults.WordLength);
+
+            return wordleApiClient;
+        });
+
+        services.AddScoped<MainViewModel>();
+
+        return services.BuildServiceProvider(true);
+    }
+}

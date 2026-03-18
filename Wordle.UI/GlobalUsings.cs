@@ -1,0 +1,14 @@
+﻿global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Net.Http;
+global using System.Runtime.Caching;
+global using System.Windows;
+global using System.Windows.Controls;
+global using System.Windows.Input;
+global using System.Windows.Media;
+global using Wordle.UI.Interfaces;
+global using Wordle.UI.Model;
+global using Wordle.UI.Services;
+global using Wordle.UI.Utilities;
+global using Wordle.UI.ViewModel;
