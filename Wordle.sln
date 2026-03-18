@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.37012.4 d17.14
+VisualStudioVersion = 17.14.37012.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.Api", "Wordle.Api\Wordle.Api.csproj", "{7C61322D-A204-47B3-B741-366F80BA32C1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.UI", "Wordle.UI\Wordle.UI.csproj", "{F746A738-A39F-4BDF-9580-085748045009}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.UI.Styles", "Wordle.UI.Styles\Wordle.UI.Styles.csproj", "{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.Tests", "Wordle.Tests\Wordle.Tests.csproj", "{BCF76330-1B26-4DB1-A0C6-209B6032B4F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7C61322D-A204-47B3-B741-366F80BA32C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C61322D-A204-47B3-B741-366F80BA32C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C61322D-A204-47B3-B741-366F80BA32C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C61322D-A204-47B3-B741-366F80BA32C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F746A738-A39F-4BDF-9580-085748045009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F746A738-A39F-4BDF-9580-085748045009}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F746A738-A39F-4BDF-9580-085748045009}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,10 +21,6 @@ Global
 		{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BCF76330-1B26-4DB1-A0C6-209B6032B4F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BCF76330-1B26-4DB1-A0C6-209B6032B4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BCF76330-1B26-4DB1-A0C6-209B6032B4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BCF76330-1B26-4DB1-A0C6-209B6032B4F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
