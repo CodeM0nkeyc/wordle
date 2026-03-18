@@ -9,3 +9,4 @@ global using Wordle.Api.Authentication;
 global using Wordle.Api.Services;
 global using Wordle.Api.BackgroundWorkers;
 global using Wordle.Api.Interfaces;
+global using Wordle.Api.Models;
