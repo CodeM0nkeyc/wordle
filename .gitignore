@@ -9,3 +9,4 @@
 *.csproj.user
 
 **/PublishProfiles
+/Wordle.Api/word.json
