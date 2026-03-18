@@ -2,8 +2,6 @@
 
 internal sealed class WordleRefresherService : BackgroundService
 {
-    private const int _wordLength = 5;
-
     private readonly IServiceProvider _serviceProvider;
     private readonly IWordleStorage _wordleStorage;
     private readonly ILogger<WordleRefresherService> _logger;
@@ -24,10 +22,7 @@ internal sealed class WordleRefresherService : BackgroundService
 
         await UpdateWordAsync();
 
-        DateTime utcNow = DateTime.UtcNow;
-        DateTime utcToStart = new DateTime(utcNow.Year, utcNow.Month, utcNow.Day + 1, 10, 0, 0);
-
-        long delay = (utcToStart - utcNow).Ticks % (TimeSpan.TicksPerHour * 24);
+        long delay = (WordleDefaults.StartRefreshUtc - DateTime.UtcNow).Ticks % (TimeSpan.TicksPerHour * 24);
 
         await Task.Delay(TimeSpan.FromTicks(delay));
 
@@ -47,7 +42,7 @@ internal sealed class WordleRefresherService : BackgroundService
         var wordleApiClient = 
             scope.ServiceProvider.GetRequiredService<IWordleApiClient>();
 
-        string word = await wordleApiClient.GetRandomWordAsync(_wordLength);
+        string word = await wordleApiClient.GetRandomWordAsync(WordleDefaults.Length);
         await _wordleStorage.SetWordAsync(word);
 
         Console.WriteLine(word);
