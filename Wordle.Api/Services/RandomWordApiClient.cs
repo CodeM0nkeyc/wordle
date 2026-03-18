@@ -18,7 +18,7 @@ internal sealed class RandomWordApiClient : IWordleApiClient
             await _httpClient.GetAsync($"api?language=en&category=wordle&length={wordLength}&words=1");
         response.EnsureSuccessStatusCode();
 
-        WordInfo[]? responseObject = await response.Content.ReadFromJsonAsync<WordInfo[]>();
+        Word[]? responseObject = await response.Content.ReadFromJsonAsync<Word[]>();
 
         if (responseObject is null || responseObject.Length == 0)
         {
