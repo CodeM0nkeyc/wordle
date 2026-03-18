@@ -4,13 +4,13 @@ public class WordleService : IWordleService
 {
     public LetterState[] CheckWord(string source, string word)
     {
-        char[] sourceArr = source.ToUpper().ToCharArray();
-        word = word.ToUpper();
-
         if (source.Length != word.Length)
         {
             throw new ArgumentException("Word length is not equal to source length", nameof(word));
         }
+
+        char[] sourceArr = source.ToUpper().ToCharArray();
+        word = word.ToUpper();
 
         int length = word.Length;
 
@@ -22,10 +22,6 @@ public class WordleService : IWordleService
             {
                 states[i] = (word[i], LetterState.Guessed);
                 sourceArr[i] = (char)0;
-            }
-            else if (sourceArr.Contains(word[i]))
-            {
-                states[i] = (word[i], LetterState.Present);
             }
             else
             {
