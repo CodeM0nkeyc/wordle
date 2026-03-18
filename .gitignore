@@ -7,3 +7,4 @@
 
 *.vs
 *.csproj.user
+/Wordle.Api/word.json
