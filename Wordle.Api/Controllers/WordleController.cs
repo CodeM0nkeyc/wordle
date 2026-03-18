@@ -19,8 +19,8 @@ public class WordleController : ControllerBase
     {
         try
         {
-            string word = await _wordleStorage.GetWordAsync();
-            return Ok(word);
+            WordleEntity word = (await _wordleStorage.GetWordAsync())!;
+            return Ok(word.CurrentWord);
         }
         catch (Exception ex)
         {

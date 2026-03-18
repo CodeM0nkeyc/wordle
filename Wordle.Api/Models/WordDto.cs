@@ -1,6 +1,6 @@
 ﻿namespace Wordle.Api.Models;
 
-public record Word(
+public record WordDto(
     [property: JsonPropertyName("word")] string Value,
     int Length,
     string Category,
