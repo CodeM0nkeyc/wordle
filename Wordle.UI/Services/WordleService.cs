@@ -16,7 +16,6 @@ public class WordleService : IWordleService
 
         LetterState[] states = new LetterState[length];
         Dictionary<char, int> presentCount = new Dictionary<char, int>();
-        bool init = false;
 
         for (int i = 0; i < length; i++)
         {
@@ -30,29 +29,24 @@ public class WordleService : IWordleService
 
             for (int j = 0; j < length; j++)
             {
-                if (!init)
-                    presentCount[input[j]] = 0;
+                int currentCount = presentCount.GetValueOrDefault(letter);
 
                 if (letter == refWord[j])
                 {
                     if (states[j] == LetterState.Guessed)
                     {
-                        presentCount[letter] -= 1;
-                        continue;
+                        presentCount[letter] = presentCount.GetValueOrDefault(letter) - 1;
+                        break;
                     }
 
-                    presentCount[letter] += 1;
+                    presentCount[letter] = currentCount + 1;
 
                     if (presentCount[letter] > 0)
                         states[i] = LetterState.Present;
                 }
-                else if (presentCount[letter] < 1)
-                {
-                    states[i] = LetterState.Wrong;
-                }
-            }
 
-            init = true;
+                states[i] = LetterState.Wrong;
+            }
         }
 
         return states;
