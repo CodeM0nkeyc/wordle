@@ -12,11 +12,9 @@ public class WordleService : IWordleService
         refWord = refWord.ToUpper();
         input = input.ToUpper();
 
-        char[] refWordArr = refWord.ToCharArray();
-
         int length = input.Length;
 
-        (char Letter, LetterState State)[] states = new (char, LetterState)[length];
+        LetterState[] states = new LetterState[length];
         Dictionary<char, int> presentCount = new Dictionary<char, int>();
         bool init = false;
 
@@ -24,24 +22,20 @@ public class WordleService : IWordleService
         {
             char letter = input[i];
 
-            if (letter == refWordArr[i])
+            if (letter == refWord[i])
             {
-                states[i] = (letter, LetterState.Guessed);
-                refWordArr[i] = (char)0;
-
+                states[i] = LetterState.Guessed;
                 continue;
             }
 
             for (int j = 0; j < length; j++)
             {
                 if (!init)
-                {
                     presentCount[input[j]] = 0;
-                }
 
-                if (letter == refWordArr[j])
+                if (letter == refWord[j])
                 {
-                    if (states[j].State == LetterState.Guessed)
+                    if (states[j] == LetterState.Guessed)
                     {
                         presentCount[letter] -= 1;
                         continue;
@@ -50,29 +44,17 @@ public class WordleService : IWordleService
                     presentCount[letter] += 1;
 
                     if (presentCount[letter] > 0)
-                    {
-                        states[i] = (letter, LetterState.Present);
-                    }
+                        states[i] = LetterState.Present;
                 }
                 else if (presentCount[letter] < 1)
                 {
-                    states[i] = (letter, LetterState.Wrong);
+                    states[i] = LetterState.Wrong;
                 }
             }
 
             init = true;
         }
 
-        return states.Select(x => x.State).ToArray();
-
-        //return states.Select(x =>
-        //{
-        //    if (x.State == LetterState.Present)
-        //    {
-        //        return sourceArr.Contains(x.Letter) ? LetterState.Present : LetterState.Wrong;
-        //    }
-
-        //    return x.State;
-        //}).ToArray();
+        return states;
     }
 }
