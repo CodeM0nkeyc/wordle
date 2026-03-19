@@ -2,5 +2,5 @@
 
 public interface IWordleService
 {
-    public LetterState[] CheckWord(string source, string word);
+    public LetterState[] CheckWord(string refWord, string input);
 }

@@ -2,41 +2,77 @@
 
 public class WordleService : IWordleService
 {
-    public LetterState[] CheckWord(string source, string word)
+    public LetterState[] CheckWord(string refWord, string input)
     {
-        if (source.Length != word.Length)
+        if (refWord.Length != input.Length)
         {
-            throw new ArgumentException("Word length is not equal to source length", nameof(word));
+            throw new ArgumentException("Word length is not equal to source length", nameof(input));
         }
 
-        char[] sourceArr = source.ToUpper().ToCharArray();
-        word = word.ToUpper();
+        refWord = refWord.ToUpper();
+        input = input.ToUpper();
 
-        int length = word.Length;
+        char[] refWordArr = refWord.ToCharArray();
+
+        int length = input.Length;
 
         (char Letter, LetterState State)[] states = new (char, LetterState)[length];
+        Dictionary<char, int> presentCount = new Dictionary<char, int>();
+        bool init = false;
 
         for (int i = 0; i < length; i++)
         {
-            if (word[i] == sourceArr[i])
+            char letter = input[i];
+
+            if (letter == refWordArr[i])
             {
-                states[i] = (word[i], LetterState.Guessed);
-                sourceArr[i] = (char)0;
+                states[i] = (letter, LetterState.Guessed);
+                refWordArr[i] = (char)0;
+
+                continue;
             }
-            else
+
+            for (int j = 0; j < length; j++)
             {
-                states[i] = (word[i], LetterState.Wrong);
+                if (!init)
+                {
+                    presentCount[input[j]] = 0;
+                }
+
+                if (letter == refWordArr[j])
+                {
+                    if (states[j].State == LetterState.Guessed)
+                    {
+                        presentCount[letter] -= 1;
+                        continue;
+                    }
+
+                    presentCount[letter] += 1;
+
+                    if (presentCount[letter] > 0)
+                    {
+                        states[i] = (letter, LetterState.Present);
+                    }
+                }
+                else if (presentCount[letter] < 1)
+                {
+                    states[i] = (letter, LetterState.Wrong);
+                }
             }
+
+            init = true;
         }
 
-        return states.Select(x =>
-        {
-            if (x.State == LetterState.Present)
-            {
-                return sourceArr.Contains(x.Letter) ? LetterState.Present : LetterState.Wrong;
-            }
+        return states.Select(x => x.State).ToArray();
 
-            return x.State;
-        }).ToArray();
+        //return states.Select(x =>
+        //{
+        //    if (x.State == LetterState.Present)
+        //    {
+        //        return sourceArr.Contains(x.Letter) ? LetterState.Present : LetterState.Wrong;
+        //    }
+
+        //    return x.State;
+        //}).ToArray();
     }
 }
