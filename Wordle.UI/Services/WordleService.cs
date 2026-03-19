@@ -15,13 +15,13 @@ public class WordleService : IWordleService
         int length = input.Length;
 
         LetterState[] states = new LetterState[length];
-        Dictionary<char, int> presentCount = new Dictionary<char, int>();
 
         for (int i = 0; i < length; i++)
         {
             char letter = input[i];
+            char refLetter = refWord[i];
 
-            if (letter == refWord[i])
+            if (letter == refLetter)
             {
                 states[i] = LetterState.Guessed;
                 continue;
@@ -29,23 +29,18 @@ public class WordleService : IWordleService
 
             for (int j = 0; j < length; j++)
             {
-                int currentCount = presentCount.GetValueOrDefault(letter);
-
-                if (letter == refWord[j])
+                if (states[j] == LetterState.Guessed || states[j] == LetterState.Present)
                 {
-                    if (states[j] == LetterState.Guessed)
-                    {
-                        presentCount[letter] = presentCount.GetValueOrDefault(letter) - 1;
-                        break;
-                    }
-
-                    presentCount[letter] = currentCount + 1;
-
-                    if (presentCount[letter] > 0)
-                        states[i] = LetterState.Present;
+                    continue;
                 }
 
-                states[i] = LetterState.Wrong;
+                if (refLetter == input[j])
+                {
+                    states[j] = LetterState.Present;
+                    break;
+                }
+                
+                states[j] = LetterState.Wrong;
             }
         }
 
