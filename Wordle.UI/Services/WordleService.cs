@@ -29,7 +29,8 @@ public class WordleService : IWordleService
 
             for (int j = 0; j < length; j++)
             {
-                if (states[j] == LetterState.Guessed || states[j] == LetterState.Present)
+                if (states[j] == LetterState.Guessed || 
+                    states[j] == LetterState.Present)
                 {
                     continue;
                 }

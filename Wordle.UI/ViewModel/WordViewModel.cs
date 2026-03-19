@@ -2,14 +2,14 @@
 
 public partial class WordViewModel : ObservableObject
 {
-    private readonly MainViewModel _mainViewModel;
+    public MainViewModel MainViewModel { get; set; }
 
     [ObservableProperty]
     private bool _current = false;
 
     public WordViewModel(int count, MainViewModel mainViewModel)
     {
-        _mainViewModel = mainViewModel;
+        MainViewModel = mainViewModel;
 
         for (int i = 0; i < count; i++)
         {
@@ -33,6 +33,6 @@ public partial class WordViewModel : ObservableObject
 
     public void NotifyLetterChanged()
     {
-        _mainViewModel.NotifyWordChanged();
+        MainViewModel.NotifyWordChanged();
     }
 }

@@ -23,6 +23,7 @@ public partial class App : Application
     {
         IServiceCollection services = new ServiceCollection();
 
+        services.AddSingleton<INotifyUserService, NotifyUserService>();
         services.AddSingleton<IWordleService, WordleService>();
 
         services.AddScoped<IWordleApiClient, WordleLocalApiClient>(p =>

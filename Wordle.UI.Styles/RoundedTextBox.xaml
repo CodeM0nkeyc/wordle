@@ -20,8 +20,7 @@
                             CornerRadius="{DynamicResource RoundedTextBox.CornerRadius}"
                             SnapsToDevicePixels="True">
 
-                        <ScrollViewer
-                                x:Name="PART_ContentHost"
+                        <ScrollViewer x:Name="PART_ContentHost"
                                 Focusable="false"
                                 HorizontalScrollBarVisibility="Hidden"
                                 VerticalScrollBarVisibility="Hidden" />

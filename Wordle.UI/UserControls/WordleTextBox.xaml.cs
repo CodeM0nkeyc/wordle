@@ -75,7 +75,7 @@ public partial class WordleTextBox : UserControl
         if (e.Key == Key.Back)
         {
             if (_currentTextBox?.Previous is null ||
-                _currentTextBox.Value.Text != string.Empty)
+                string.IsNullOrEmpty(_currentTextBox.Value.Text))
             {
                 return;
             }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.UI", "Wordle.UI\Word
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.UI.Styles", "Wordle.UI.Styles\Wordle.UI.Styles.csproj", "{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.UI.Tests", "Wordle.UI.Tests\Wordle.UI.Tests.csproj", "{7FE4DBDA-0B6B-45D1-B635-F7577544886E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FE4DBDA-0B6B-45D1-B635-F7577544886E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FE4DBDA-0B6B-45D1-B635-F7577544886E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FE4DBDA-0B6B-45D1-B635-F7577544886E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FE4DBDA-0B6B-45D1-B635-F7577544886E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

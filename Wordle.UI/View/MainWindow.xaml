@@ -32,8 +32,7 @@
 
                             <controls:WordleTextBox.InputBindings>
                                 <KeyBinding Key="Return"
-                                            Command="{Binding RelativeSource={RelativeSource AncestorType=local:MainWindow},
-                                                              Path=ViewModel.CheckWordCommand}" />
+                                            Command="{Binding MainViewModel.CheckWordCommand}" />
                             </controls:WordleTextBox.InputBindings>
                         </controls:WordleTextBox>
                     </DataTemplate>

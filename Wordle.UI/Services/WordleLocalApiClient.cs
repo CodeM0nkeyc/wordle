@@ -2,15 +2,15 @@
 
 internal class WordleLocalApiClient : IWordleApiClient, IDisposable
 {
+    private const string CacheKey = "word";
+
     private bool _disposed = false;
 
-    private const string _cacheKey = "word";
+    private readonly string apiUrl;
+    private readonly string apiKey;
+    private readonly int wordLength;
 
-    protected readonly string apiUrl;
-    protected readonly string apiKey;
-    protected readonly int wordLength;
-
-    protected readonly Lazy<HttpClient> httpClient;
+    private readonly Lazy<HttpClient> httpClient;
 
     public WordleLocalApiClient(string apiUrl, string apiKey, int wordLength)
     {
@@ -40,7 +40,7 @@ internal class WordleLocalApiClient : IWordleApiClient, IDisposable
 
     public virtual async Task<string> GetRandomWordAsync()
     {
-        string? word = MemoryCache.Default.Get(_cacheKey) as string;
+        string? word = MemoryCache.Default.Get(CacheKey) as string;
 
         if (word is not null)
         {
@@ -60,7 +60,7 @@ internal class WordleLocalApiClient : IWordleApiClient, IDisposable
         }
 
         DateTimeOffset dateTimeOffset = new DateTimeOffset().AddMinutes(10);
-        MemoryCache.Default.Set(_cacheKey, word, dateTimeOffset);
+        MemoryCache.Default.Set(CacheKey, word, dateTimeOffset);
 
         return word;
     }

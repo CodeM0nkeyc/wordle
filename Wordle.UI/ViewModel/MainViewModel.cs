@@ -4,6 +4,8 @@ public partial class MainViewModel : ObservableObject
 {
     private string? _fetchedWord;
 
+    private readonly INotifyUserService _notifyUserService;
+
     private readonly IWordleService _wordleService;
     private readonly IWordleApiClient _wordleApiClient;
 
@@ -13,9 +15,11 @@ public partial class MainViewModel : ObservableObject
     private LinkedListNode<WordViewModel> _currentWord;
 
     public MainViewModel(
+        INotifyUserService notifyUserService,
         IWordleService wordleService,
         IWordleApiClient wordleApiClient)
     {
+        _notifyUserService = notifyUserService;
         _wordleService = wordleService;
         _wordleApiClient = wordleApiClient;
 
@@ -42,11 +46,7 @@ public partial class MainViewModel : ObservableObject
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Something went wrong. Please, try later.", "Error",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-
+                _notifyUserService.NotifyByMessageBox("Something went wrong. Please, try later.", "Error", true);
                 return;
             }
         }
@@ -63,7 +63,7 @@ public partial class MainViewModel : ObservableObject
         if (currentWord.Guessed)
         {
             _currentWord.Value.Current = false;
-            MessageBox.Show("Congratulations! You guessed the word.");
+            _notifyUserService.NotifyByMessageBox("Congratulations! You guessed the word.", "Congratulations", false);
             return;
         }
 
@@ -71,7 +71,10 @@ public partial class MainViewModel : ObservableObject
 
         if (isLastWord)
         {
-            MessageBox.Show($"You didn't guessed the word. It's {_fetchedWord}. Don't frustrate, you will get it another time.");
+            _notifyUserService.NotifyByMessageBox(
+                $"You didn't guessed the word. It's {_fetchedWord}. Don't frustrate, you will get it another time.",
+                "Will guess another time",
+                false);
         }
     }
 
