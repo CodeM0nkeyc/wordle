@@ -5,16 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wordle.UI.View"
         xmlns:vm="clr-namespace:Wordle.UI.ViewModel"
+        xmlns:services="clr-namespace:Wordle.UI.Services"
         xmlns:controls="clr-namespace:Wordle.UI.UserControls"
         mc:Ignorable="d"
         Title="Wordle"
         Icon="/Resources/drunk-man.ico"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
-        Background="AliceBlue">
-    <Window.DataContext>
-        <Binding RelativeSource="{RelativeSource Mode=Self}" Path="ViewModel"/>
-    </Window.DataContext>
+        Background="AliceBlue"
+        DataContext="{Binding Source={x:Static services:ViewModelLocator.MainViewModel}}">
 
     <Window.Resources>
         <Style x:Key="listViewWordleStyle" TargetType="ListView">

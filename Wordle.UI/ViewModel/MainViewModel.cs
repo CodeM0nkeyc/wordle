@@ -59,7 +59,6 @@ public partial class MainViewModel : ObservableObject
         {
             currentWord.Letters[i].State = letterStates[i];
         }
-
         if (currentWord.Guessed)
         {
             _currentWord.Value.Current = false;

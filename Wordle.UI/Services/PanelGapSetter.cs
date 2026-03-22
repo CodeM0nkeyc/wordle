@@ -14,9 +14,7 @@ public class PanelGapSetter
 
     private static void OnGapPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        Panel? panel = d as Panel;
-
-        if (panel is null)
+        if (d is not Panel panel)
         {
             return;
         }
@@ -26,13 +24,14 @@ public class PanelGapSetter
 
     private static void OnPanelLoaded(object sender , RoutedEventArgs e)
     {
-        Panel panel = (sender as Panel)!;
+        if (sender is not Panel panel)
+        {
+            return;
+        }
 
         for (int i = 0; i < panel.Children.Count - 1; i++)
         {
-            FrameworkElement? child = panel.Children[i] as FrameworkElement;
-
-            if (child is null)
+            if (panel.Children[i] is not FrameworkElement child)
             {
                 continue;
             }

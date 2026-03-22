@@ -35,9 +35,7 @@ public partial class WordleTextBox : UserControl
 
     private void SetupTextInputList(object sender, RoutedEventArgs e)
     {
-        ListView? listView = sender as ListView;
-
-        if (listView is null)
+        if (sender is not ListView listView)
         {
             throw new InvalidOperationException($"{nameof(SetupTextInputList)} should be used only on ListView objects.");
         }

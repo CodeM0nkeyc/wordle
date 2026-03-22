@@ -26,7 +26,7 @@ public partial class App : Application
         services.AddSingleton<INotifyUserService, NotifyUserService>();
         services.AddSingleton<IWordleService, WordleService>();
 
-        services.AddScoped<IWordleApiClient, WordleLocalApiClient>(p =>
+        services.AddSingleton<IWordleApiClient, WordleLocalApiClient>(p =>
         {
             var wordleApiClient = new WordleLocalApiClient(
                 Defaults.BaseApiUrl + "/wordle", Defaults.ApiKey, Defaults.WordLength);
@@ -34,7 +34,7 @@ public partial class App : Application
             return wordleApiClient;
         });
 
-        services.AddScoped<MainViewModel>();
+        services.AddSingleton<MainViewModel>();
 
         return services.BuildServiceProvider(true);
     }
