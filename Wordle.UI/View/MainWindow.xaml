@@ -13,7 +13,7 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         Background="AliceBlue"
-        DataContext="{Binding Source={x:Static services:ViewModelLocator.MainViewModel}}">
+        DataContext="{Binding Source={x:Static services:ServiceLocator.MainViewModel}}">
 
     <Window.Resources>
         <Style x:Key="listViewWordleStyle" TargetType="ListView">

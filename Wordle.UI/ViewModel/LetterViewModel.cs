@@ -19,7 +19,11 @@ public partial class LetterViewModel : ObservableObject
         get => _value;
         set
         {
-            SetProperty(ref _value, value);
+            if (!SetProperty(ref _value, value))
+            {
+                return;
+            }
+
             _owner.NotifyLetterChanged();
         }
     }
