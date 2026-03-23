@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.37012.4
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.UI", "Wordle.UI\Wordle.UI.csproj", "{F746A738-A39F-4BDF-9580-085748045009}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.UI.Styles", "Wordle.UI.Styles\Wordle.UI.Styles.csproj", "{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.UI.Tests", "Wordle.UI.Tests\Wordle.UI.Tests.csproj", "{7FE4DBDA-0B6B-45D1-B635-F7577544886E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordle.Api", "Wordle.Api\Wordle.Api.csproj", "{7C61322D-A204-47B3-B741-366F80BA32C1}"
 EndProject
 Global
@@ -11,6 +17,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F746A738-A39F-4BDF-9580-085748045009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F746A738-A39F-4BDF-9580-085748045009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F746A738-A39F-4BDF-9580-085748045009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F746A738-A39F-4BDF-9580-085748045009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDF9E91-CAB1-41C9-AC18-54DE8CA2B54E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FE4DBDA-0B6B-45D1-B635-F7577544886E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FE4DBDA-0B6B-45D1-B635-F7577544886E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FE4DBDA-0B6B-45D1-B635-F7577544886E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FE4DBDA-0B6B-45D1-B635-F7577544886E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7C61322D-A204-47B3-B741-366F80BA32C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C61322D-A204-47B3-B741-366F80BA32C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C61322D-A204-47B3-B741-366F80BA32C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
