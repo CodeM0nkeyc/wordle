@@ -4,7 +4,6 @@ public partial class LetterViewModel : ObservableObject
 {
     private readonly WordViewModel _owner;
 
-    [ObservableProperty]
     private string _value = string.Empty;
 
     [ObservableProperty]
@@ -15,8 +14,9 @@ public partial class LetterViewModel : ObservableObject
         _owner = owner;
     }
 
-    partial void OnValueChanged(string? oldValue, string newValue)
+    public string Value
     {
-        _owner.NotifyLetterChanged();
+        get => _value;
+        set => SetProperty(ref _value, value);
     }
 }
