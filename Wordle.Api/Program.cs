@@ -16,7 +16,7 @@ builder.Services.AddAuthentication(ApiKeyAuthenticationDefaults.Scheme)
 
 builder.Services.AddControllers();
 
-builder.Services.AddSingleton<IWordleStorage, FileWordleStorage>();
+builder.Services.AddSingleton<IWordleStorage, JsonWordleStorage>();
 
 builder.Services.AddScoped<IWordleApiClient, RandomWordApiClient>();
 

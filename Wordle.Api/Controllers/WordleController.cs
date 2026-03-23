@@ -19,8 +19,20 @@ public class WordleController : ControllerBase
     {
         try
         {
-            string word = await _wordleStorage.GetWordAsync();
-            return Ok(word);
+            WordleEntity word = (await _wordleStorage.GetWordAsync())!;
+
+            if (Request.Headers.TryGetValue("X-TimeZone", out var timeZoneOffset))
+            {
+                TimeSpan offset = TimeSpan.Parse(timeZoneOffset.ToString());
+                DateTime startUtc = WordleDefaults.StartRefreshUtc.Subtract(TimeSpan.FromDays(1));
+
+                if (DateTime.UtcNow + offset < startUtc)
+                {
+                    return Ok(word.OldWord);
+                }
+            }
+
+            return Ok(word.CurrentWord);
         }
         catch (Exception ex)
         {

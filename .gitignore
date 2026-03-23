@@ -7,5 +7,6 @@
 
 *.vs
 *.csproj.user
-/Wordle.Api/word.json
+
 **/PublishProfiles
+/Wordle.Api/word.json
