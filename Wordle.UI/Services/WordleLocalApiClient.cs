@@ -6,19 +6,15 @@ internal class WordleLocalApiClient : IWordleApiClient, IDisposable
 
     private bool _disposed = false;
 
-    private readonly string apiUrl;
-    private readonly string apiKey;
-    private readonly int wordLength;
+    private readonly int _wordLength;
 
-    private readonly Lazy<HttpClient> httpClient;
+    private readonly Lazy<HttpClient> _httpClient;
 
     public WordleLocalApiClient(string apiUrl, string apiKey, int wordLength)
     {
-        this.apiUrl = apiUrl;
-        this.apiKey = apiKey;
-        this.wordLength = wordLength;
+        _wordLength = wordLength;
 
-        httpClient = new Lazy<HttpClient>(() =>
+        _httpClient = new Lazy<HttpClient>(() =>
         {
             HttpClient httpClient = new HttpClient()
             {
@@ -47,14 +43,14 @@ internal class WordleLocalApiClient : IWordleApiClient, IDisposable
             return word;
         }
 
-        var httpClient = this.httpClient.Value;
+        var httpClient = this._httpClient.Value;
         var response = await httpClient.GetAsync("");
 
         response.EnsureSuccessStatusCode();
 
         word = await response.Content.ReadAsStringAsync();
 
-        if (string.IsNullOrEmpty(word) || word.Length != wordLength)
+        if (string.IsNullOrEmpty(word) || word.Length != _wordLength)
         {
             throw new InvalidOperationException($"Invalid string was returned from api: {word}");
         }
@@ -78,9 +74,9 @@ internal class WordleLocalApiClient : IWordleApiClient, IDisposable
             return;
         }
 
-        if (httpClient.IsValueCreated)
+        if (_httpClient.IsValueCreated)
         {
-            httpClient.Value.Dispose();
+            _httpClient.Value.Dispose();
         }
 
         _disposed = true;
