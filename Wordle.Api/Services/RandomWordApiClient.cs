@@ -1,0 +1,32 @@
+﻿namespace Wordle.Api.Services;
+
+internal sealed class RandomWordApiClient : IWordleApiClient
+{
+    private const int _wordLength = 5;
+
+    private const string _apiUrl = @"https://random-word-api.herokuapp.com";
+
+    private readonly HttpClient _httpClient;
+
+    public RandomWordApiClient(IHttpClientFactory httpClientFactory) 
+    {
+        _httpClient = httpClientFactory.CreateClient("WordleClient");
+        _httpClient.BaseAddress = new Uri(_apiUrl);
+    }
+
+    public async Task<string> GetRandomWordAsync()
+    {
+        HttpResponseMessage response = await _httpClient.GetAsync($"word?length={_wordLength}");
+        response.EnsureSuccessStatusCode();
+
+        string[]? responseObject = await response.Content.ReadFromJsonAsync<string[]>();
+
+        if (responseObject is null || responseObject.Length == 0)
+        {
+            throw new InvalidOperationException(
+                $"Api call to {response.RequestMessage?.RequestUri?.ToString()} returned nothing.");
+        }
+
+        return responseObject[0];
+    }
+}
