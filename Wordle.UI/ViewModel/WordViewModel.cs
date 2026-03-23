@@ -2,7 +2,6 @@
 
 public partial class WordViewModel : ObservableObject
 {
-    public MainViewModel MainViewModel { get; set; }
 
     [ObservableProperty]
     private bool _current = false;
@@ -17,6 +16,8 @@ public partial class WordViewModel : ObservableObject
             Letters.Add(letter);
         }
     }
+
+    public MainViewModel MainViewModel { get; }
 
     public List<LetterViewModel> Letters { get; set; } = new List<LetterViewModel>();
 
